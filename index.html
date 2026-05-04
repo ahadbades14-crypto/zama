@@ -3,236 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZAMA - 59 Langues + Fon Yoruba</title>
+    <title>ZAMA - Traducteur Bénin</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FF6B35">
     <style>
-        body{font-family:Arial,sans-serif;background:#FF6B35;color:white;margin:0;padding:20px;text-align:center}
-      .logo{font-size:42px;font-weight:900;margin:15px 0}
-      .box{background:white;color:#333;border-radius:20px;padding:20px;margin:15px 0}
-        textarea{width:100%;height:80px;border:2px solid #FF6B35;border-radius:10px;padding:10px;font-size:16px}
-        select,button{width:100%;padding:12px;margin:8px 0;border:none;border-radius:10px;font-size:16px}
-        button{background:#FF6B35;color:white;font-weight:bold;cursor:pointer}
-      .result{background:#f0f0f0;padding:15px;border-radius:10px;margin-top:10px;min-height:50px;color:#333;text-align:left}
-      .badge{background:#FF6B35;color:white;padding:2px 6px;border-radius:4px;font-size:12px}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+        body{background:#FF6B35;min-height:100vh;padding:15px}
+      .container{max-width:400px;margin:0 auto;background:white;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        h1{text-align:center;color:#FF6B35;font-size:2.5em;margin-bottom:5px;font-weight:900}
+      .subtitle{text-align:center;color:#666;margin-bottom:15px;font-size:0.9em}
+        textarea{width:100%;padding:15px;border:2px solid #FF6B35;border-radius:10px;font-size:16px;min-height:80px;resize:none}
+        select{width:100%;padding:12px;margin:8px 0;border:2px solid #ddd;border-radius:10px;font-size:16px;background:white}
+        button{width:100%;padding:15px;background:#FF6B35;color:white;border:none;border-radius:10px;font-size:16px;font-weight:bold;margin:8px 0;cursor:pointer}
+        button:active{transform:scale(0.98)}
+      .btn-small{width:48%;display:inline-block;font-size:14px;padding:12px}
+      .result{background:#f8f8f8;padding:15px;border-radius:10px;min-height:80px;border:2px dashed #ddd;white-space:pre-wrap}
+      .tools{display:flex;justify-content:space-between;margin:8px 0}
+      .listening{background:#00C853!important}
+       #photoInput{display:none}
     </style>
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
 </head>
 <body>
-    <div class="logo">ZAMA</div>
-    <p>59 Langues + Langues Bénin 🇧🇯</p>
-    
-    <div class="box">
-        <textarea id="inputText" placeholder="Écris ton texte ici..."></textarea>
+    <div class="container">
+        <h1>ZAMA</h1>
+        <p class="subtitle">59 Langues + Langues Bénin 🇧🇯</p>
+        
+        <textarea id="inputText" placeholder="Écris ou parle...">Bonjour</textarea>
+        
+        <div class="tools">
+            <button class="btn-small" onclick="startVoice()" id="micBtn">🎤 Parler</button>
+            <button class="btn-small" onclick="document.getElementById('photoInput').click()">📷 Photo</button>
+        </div>
+        <input type="file" id="photoInput" accept="image/*" onchange="readPhoto(event)">
         
         <select id="fromLang">
             <option value="fr">Français</option>
             <option value="fon">Fon - Fɔngbé 🇧🇯</option>
-            <option value="yo">Yoruba - Yorùbá 🇧🇯🇳🇬</option>
+            <option value="yor">Yoruba - Yorùbá 🇧🇯</option>
             <option value="en">Anglais</option>
+            <option value="zh-CN">Chinois 🇨🇳</option>
             <option value="ar">Arabe</option>
-            <option value="es">Espagnol</option>
-            <option value="pt">Portugais</option>
-            <option value="de">Allemand</option>
-            <option value="it">Italien</option>
-            <option value="ru">Russe</option>
-            <option value="zh">Chinois</option>
-            <option value="ja">Japonais</option>
-            <option value="ko">Coréen</option>
-            <option value="hi">Hindi</option>
-            <option value="tr">Turc</option>
-            <option value="nl">Néerlandais</option>
-            <option value="pl">Polonais</option>
-            <option value="sv">Suédois</option>
-            <option value="no">Norvégien</option>
-            <option value="da">Danois</option>
-            <option value="fi">Finnois</option>
-            <option value="el">Grec</option>
-            <option value="he">Hébreu</option>
-            <option value="th">Thaï</option>
-            <option value="vi">Vietnamien</option>
-            <option value="id">Indonésien</option>
-            <option value="ms">Malais</option>
-            <option value="tl">Tagalog</option>
-            <option value="cs">Tchèque</option>
-            <option value="sk">Slovaque</option>
-            <option value="hu">Hongrois</option>
-            <option value="ro">Roumain</option>
-            <option value="bg">Bulgare</option>
-            <option value="hr">Croate</option>
-            <option value="sr">Serbe</option>
-            <option value="uk">Ukrainien</option>
-            <option value="ca">Catalan</option>
-            <option value="eu">Basque</option>
-            <option value="gl">Galicien</option>
-            <option value="is">Islandais</option>
-            <option value="ga">Irlandais</option>
-            <option value="mt">Maltais</option>
-            <option value="sw">Swahili</option>
-            <option value="ha">Haoussa</option>
-            <option value="am">Amharique</option>
-            <option value="zu">Zoulou</option>
-            <option value="xh">Xhosa</option>
-            <option value="so">Somali</option>
-            <option value="af">Afrikaans</option>
-            <option value="ur">Ourdou</option>
-            <option value="fa">Persan</option>
-            <option value="bn">Bengali</option>
-            <option value="ta">Tamoul</option>
-            <option value="te">Télougou</option>
-            <option value="mr">Marathi</option>
-            <option value="gu">Gujarati</option>
-            <option value="pa">Pendjabi</option>
-            <option value="kn">Kannada</option>
-            <option value="ml">Malayalam</option>
-            <option value="si">Cingalais</option>
-            <option value="ne">Népalais</option>
-            <option value="dendi">Dendi 🇧🇯</option>
-            <option value="bariba">Bariba 🇧🇯</option>
-            <option value="adja">Adja 🇧🇯</option>
         </select>
         
-        <button onclick="switchLang()">↑↓ Inverser</button>
+        <button onclick="swapLang()">↑↓ Inverser</button>
         
         <select id="toLang">
             <option value="fon">Fon - Fɔngbé 🇧🇯</option>
-            <option value="yo">Yoruba - Yorùbá 🇧🇯🇳🇬</option>
             <option value="fr">Français</option>
+            <option value="yor">Yoruba - Yorùbá 🇧🇯</option>
             <option value="en">Anglais</option>
+            <option value="zh-CN">Chinois 🇨🇳</option>
             <option value="ar">Arabe</option>
-            <option value="es">Espagnol</option>
-            <option value="pt">Portugais</option>
-            <option value="de">Allemand</option>
-            <option value="it">Italien</option>
-            <option value="ru">Russe</option>
-            <option value="zh">Chinois</option>
-            <option value="ja">Japonais</option>
-            <option value="ko">Coréen</option>
-            <option value="hi">Hindi</option>
-            <option value="tr">Turc</option>
-            <option value="nl">Néerlandais</option>
-            <option value="pl">Polonais</option>
-            <option value="sv">Suédois</option>
-            <option value="no">Norvégien</option>
-            <option value="da">Danois</option>
-            <option value="fi">Finnois</option>
-            <option value="el">Grec</option>
-            <option value="he">Hébreu</option>
-            <option value="th">Thaï</option>
-            <option value="vi">Vietnamien</option>
-            <option value="id">Indonésien</option>
-            <option value="ms">Malais</option>
-            <option value="tl">Tagalog</option>
-            <option value="cs">Tchèque</option>
-            <option value="sk">Slovaque</option>
-            <option value="hu">Hongrois</option>
-            <option value="ro">Roumain</option>
-            <option value="bg">Bulgare</option>
-            <option value="hr">Croate</option>
-            <option value="sr">Serbe</option>
-            <option value="uk">Ukrainien</option>
-            <option value="ca">Catalan</option>
-            <option value="eu">Basque</option>
-            <option value="gl">Galicien</option>
-            <option value="is">Islandais</option>
-            <option value="ga">Irlandais</option>
-            <option value="mt">Maltais</option>
-            <option value="sw">Swahili</option>
-            <option value="ha">Haoussa</option>
-            <option value="am">Amharique</option>
-            <option value="zu">Zoulou</option>
-            <option value="xh">Xhosa</option>
-            <option value="so">Somali</option>
-            <option value="af">Afrikaans</option>
-            <option value="ur">Ourdou</option>
-            <option value="fa">Persan</option>
-            <option value="bn">Bengali</option>
-            <option value="ta">Tamoul</option>
-            <option value="te">Télougou</option>
-            <option value="mr">Marathi</option>
-            <option value="gu">Gujarati</option>
-            <option value="pa">Pendjabi</option>
-            <option value="kn">Kannada</option>
-            <option value="ml">Malayalam</option>
-            <option value="si">Cingalais</option>
-            <option value="ne">Népalais</option>
-            <option value="dendi">Dendi 🇧🇯</option>
-            <option value="bariba">Bariba 🇧🇯</option>
-            <option value="adja">Adja 🇧🇯</option>
         </select>
         
         <button onclick="translate()">TRADUIRE</button>
+        
         <div class="result" id="result">La traduction apparaît ici</div>
+        <button onclick="speak()" style="background:#00C853">🔊 ÉCOUTER LA TRADUCTION</button>
     </div>
 
-    <script>
-        // Dico Fon-Français 60 mots offline
-        const fonDico = {
-            "a":"tu","un":"je","é":"il","mi":"nous","miɖɔ":"bonjour","nùɖé":"comment","aɖɔ":"ça va","ɛɛn":"oui","éé":"non",
-            "kúkú":"merci","ɖagbé":"bien","nyì":"nom","xɔ":"maison","sìn":"eau","nùɖù":"nourriture","wémà":"livre",
-            "àzɔ̌":"travail","àkwɛ́":"argent","vǐ":"enfant","dǎwe":"homme","nyɔ̌nu":"femme","tɔ́":"père","nɔ̀":"mère",
-            "xɔ́ntɔ̀n":"ami","Bɛnɛɛ":"Bénin","yovo":"blanc","àzǎn":"jour","zǎn":"nuit","hwè":"soleil","sùn":"lune",
-            "jǐ":"ciel","ayǐ":"terre","ató":"oreille","nukún":"œil","ɖà":"cheveux","tà":"tête","alɔ":"main","afɔ":"pied",
-            "xwé":"année","sùn":"mois","gàn":"heure","ɖokpó":"un","wè":"deux","àtɔ̀n":"trois","ɛ̀nɛ":"quatre","àtɔ́ɔ́n":"cinq",
-            "ayì":"cœur","lɛ̌n":"aimer","ɖù":"manger","nù":"boire","yì":"aller","wá":"venir","ɖɔ":"dire","sè":"entendre",
-            "mɔ":"voir","nyɔ́":"bon","nyàn":"mauvais"
-        };
-        const frToFon = Object.fromEntries(Object.entries(fonDico).map(([k,v])=>[v,k]));
+<script>
+const FON = {"bonjour":"miɖɔ","merci":"kúkú","oui":"ɛɛn","non":"ɛɛó","eau":"sin","manger":"ɖu","maison":"xwé","argent":"akwɛ","venir":"wá","aller":"yi","bien":"ɖagbe","homme":"súnnu","femme":"nyɔnu","enfant":"vǐ","je t'aime":"un nyi wǎn na we","comment ça va":"a ɖo gbɛ a","ça va bien":"un ɖo gbɛ","pardon":"kɛnklɛn","au revoir":"yiɖé"};
+const YOR = {"bonjour":"eku aro","merci":"ese","oui":"bẹẹni","non":"rara","eau":"omi","manger":"jẹun","maison":"ile","argent":"owo","venir":"wa","aller":"lo","je t'aime":"mo nifẹ rẹ"};
 
-        // Dico Yoruba de base 20 mots
-        const yoDico = {"bawo":"bonjour","se":"comment","dara":"ça va","beeni":"oui","rara":"non","ese":"merci","ile":"maison","omi":"eau","ounje":"nourriture","owo":"argent","omo":"enfant","okunrin":"homme","obirin":"femme","baba":"père","iya":"mère","ore":"ami","Benin":"Bénin","oju":"œil","ori":"tête","owo":"main"};
-        const frToYo = Object.fromEntries(Object.entries(yoDico).map(([k,v])=>[v,k]));
+let lastTranslation = '';
 
-        function switchLang() {
-            let from = document.getElementById('fromLang');
-            let to = document.getElementById('toLang');
-            [from.value, to.value] = [to.value, from.value];
-        }
+function swapLang(){
+    let from = document.getElementById('fromLang');
+    let to = document.getElementById('toLang');
+    [from.value, to.value] = [to.value, from.value];
+}
 
-        async function translate() {
-            const text = document.getElementById('inputText').value.trim();
-            const from = document.getElementById('fromLang').value;
-            const to = document.getElementById('toLang').value;
-            const resultDiv = document.getElementById('result');
-            
-            if(!text) return resultDiv.innerText = "Écris un texte d'abord";
-            resultDiv.innerHTML = "Traduction...";
+async function translate(){
+    const text = document.getElementById('inputText').value.trim().toLowerCase();
+    const from = document.getElementById('fromLang').value;
+    const to = document.getElementById('toLang').value;
+    const res = document.getElementById('result');
+    
+    if(!text){res.innerHTML='Écris quelque chose';return;}
+    if(from===to){res.innerHTML=text;lastTranslation=text;return;}
+    
+    res.innerHTML='Traduction...';
+    
+    // 1. DICO FON
+    if(from==='fr' && to==='fon' && FON[text]){res.innerHTML=FON[text]+' [Dico ZAMA]';lastTranslation=FON[text];return;}
+    if(from==='fon' && to==='fr'){for(let k in FON){if(FON[k]===text){res.innerHTML=k+' [Dico ZAMA]';lastTranslation=k;return;}}}
+    
+    // 2. DICO YORUBA 
+    if(from==='fr' && to==='yor' && YOR[text]){res.innerHTML=YOR[text]+' [Dico ZAMA]';lastTranslation=YOR[text];return;}
+    if(from==='yor' && to==='fr'){for(let k in YOR){if(YOR[k]===text){res.innerHTML=k+' [Dico ZAMA]';lastTranslation=k;return;}}}
+    
+    // 3. GOOGLE POUR 59 LANGUES + CHINOIS
+    try{
+        const url=`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${encodeURIComponent(text)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        lastTranslation = data[0][0][0];
+        res.innerHTML=lastTranslation+' [Google]';
+    }catch(e){
+        res.innerHTML='Erreur. Active internet ou mot absent du dico offline.';
+    }
+}
 
-            // 1. FON OFFLINE
-            if(from === 'fon' && to === 'fr') {
-                let trad = text.toLowerCase().split(' ').map(m => fonDico[m] || m).join(' ');
-                return resultDiv.innerHTML = trad + ' <span class="badge">Dico ZAMA</span>';
-            }
-            if(from === 'fr' && to === 'fon') {
-                let trad = text.toLowerCase().split(' ').map(m => frToFon[m] || m).join(' ');
-                return resultDiv.innerHTML = trad + ' <span class="badge">Dico ZAMA</span>';
-            }
+// VOCAL - Parler pour écrire
+function startVoice(){
+    const micBtn = document.getElementById('micBtn');
+    if(!('webkitSpeechRecognition' in window)){alert('Vocal pas supporté sur ce navigateur. Utilise Chrome.');return;}
+    
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = document.getElementById('fromLang').value;
+    recognition.start();
+    micBtn.classList.add('listening');
+    micBtn.innerHTML='🎤 ÉCOUTE...';
+    
+    recognition.onresult = (e)=>{
+        document.getElementById('inputText').value = e.results[0][0].transcript;
+        micBtn.classList.remove('listening');
+        micBtn.innerHTML='🎤 Parler';
+        translate();
+    };
+    recognition.onerror = ()=>{micBtn.classList.remove('listening');micBtn.innerHTML='🎤 Parler';};
+}
 
-            // 2. YORUBA OFFLINE
-            if(from === 'yo' && to === 'fr') {
-                let trad = text.toLowerCase().split(' ').map(m => yoDico[m] || m).join(' ');
-                return resultDiv.innerHTML = trad + ' <span class="badge">Dico ZAMA</span>';
-            }
-            if(from === 'fr' && to === 'yo') {
-                let trad = text.toLowerCase().split(' ').map(m => frToYo[m] || m).join(' ');
-                return resultDiv.innerHTML = trad + ' <span class="badge">Dico ZAMA</span>';
-            }
+// AUDIO - Lire la traduction
+function speak(){
+    if(!lastTranslation){alert('Traduis d\'abord');return;}
+    const to = document.getElementById('toLang').value;
+    const utterance = new SpeechSynthesisUtterance(lastTranslation);
+    utterance.lang = to==='fon'||to==='yor'?'fr-FR':to; // Fon/Yoruba lus en français
+    speechSynthesis.speak(utterance);
+}
 
-            // 3. LANGUES BÉNIN NON SUPPORTÉES
-            if(['dendi','bariba','adja'].includes(to) || ['dendi','bariba','adja'].includes(from)) {
-                return resultDiv.innerHTML = 'Bientôt dispo sur ZAMA 🇧🇯 <span class="badge">Version 2</span>';
-            }
+// PHOTO - Lire texte sur image
+async function readPhoto(event){
+    const file = event.target.files[0];
+    if(!file) return;
+    document.getElementById('result').innerHTML='Lecture photo...';
+    const {data:{text}} = await Tesseract.recognize(file,'fra+eng');
+    document.getElementById('inputText').value = text.trim();
+    translate();
+}
 
-            // 4. GOOGLE TRANSLATE POUR LES 59 AUTRES
-            try {
-                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${encodeURIComponent(text)}`);
-                const data = await res.json();
-                resultDiv.innerHTML = data[0][0][0] + ' <span class="badge">Google</span>';
-            } catch(e) {
-                resultDiv.innerText = "Erreur. Active internet.";
-            }
-        }
-
-        if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-    </script>
+// PWA
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
 </body>
-  </html>
+    </html>
