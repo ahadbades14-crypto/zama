@@ -9,27 +9,27 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
         body{background:#FF6B35;min-height:100vh;padding:15px}
-    .container{max-width:400px;margin:0 auto;background:white;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+  .container{max-width:400px;margin:0 auto;background:white;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
         h1{text-align:center;color:#FF6B35;font-size:2.5em;margin-bottom:5px;font-weight:900}
-    .subtitle{text-align:center;color:#666;margin-bottom:15px;font-size:0.9em}
+  .subtitle{text-align:center;color:#666;margin-bottom:15px;font-size:0.9em}
         textarea{width:100%;padding:15px;border:2px solid #FF6B35;border-radius:10px;font-size:16px;min-height:80px;resize:none}
         select{width:100%;padding:12px;margin:8px 0;border:2px solid #ddd;border-radius:10px;font-size:16px;background:white}
         button{width:100%;padding:15px;background:#FF6B35;color:white;border:none;border-radius:10px;font-size:16px;font-weight:bold;margin:8px 0;cursor:pointer}
         button:active{transform:scale(0.98)}
-    .btn-small{width:48%;display:inline-block;font-size:14px;padding:12px}
-    .btn-pro{background:linear-gradient(45deg,#FFD700,#FFA500);color:#000}
-    .btn-don{background:#00C853}
-    .result{background:#f8f8f8;padding:15px;border-radius:10px;min-height:80px;border:2px dashed #ddd;white-space:pre-wrap}
-    .tools{display:flex;justify-content:space-between;margin:8px 0}
-    .listening{background:#00C853!important}
-    .ad-banner{background:#eee;padding:10px;text-align:center;margin:10px 0;border-radius:10px;font-size:12px}
-    .pro-badge{background:#FFD700;color:#000;padding:2px 8px;border-radius:5px;font-size:12px;font-weight:bold}
+  .btn-small{width:48%;display:inline-block;font-size:14px;padding:12px}
+  .btn-pro{background:linear-gradient(45deg,#FFD700,#FFA500);color:#000}
+  .btn-don{background:#00C853}
+  .result{background:#f8f8f8;padding:15px;border-radius:10px;min-height:80px;border:2px dashed #ddd;white-space:pre-wrap}
+  .tools{display:flex;justify-content:space-between;margin:8px 0}
+  .listening{background:#00C853!important}
+  .ad-banner{background:#eee;padding:10px;text-align:center;margin:10px 0;border-radius:10px;font-size:12px;min-height:50px}
+  .pro-badge{background:#FFD700;color:#000;padding:2px 8px;border-radius:5px;font-size:12px;font-weight:bold}
       #photoInput{display:none}
-    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:999}
-    .modal-content{background:white;margin:30% auto;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center}
+  .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:999}
+  .modal-content{background:white;margin:30% auto;padding:20px;border-radius:15px;width:90%;max-width:350px;text-align:center}
     </style>
     <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
-    <!-- REMPLACE ca-pub-XXXXXXXXXXXXXXXX PAR TON CODE ADSENSE -->
+    <!-- REMPLACE ca-pub-XXXXXXXXXXXXXXXX PAR TON CODE ADSENSE QUAND TU L'AURAS -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -37,12 +37,12 @@
         <h1>ZAMA <span id="proBadge"></span></h1>
         <p class="subtitle">59 Langues + Langues Bénin 🇧🇯</p>
 
-        <!-- PUB GOOGLE -->
         <div class="ad-banner">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto"></ins>
+            <small>Publicité</small>
         </div>
 
-        <textarea id="inputText" placeholder="Écris ou parle...">Bonjour</textarea>
+        <textarea id="inputText" placeholder="Écris ou parle...">bonjour</textarea>
 
         <div class="tools">
             <button class="btn-small" onclick="startVoice()" id="micBtn">🎤 Parler</button>
@@ -72,41 +72,36 @@
         <div class="result" id="result">La traduction apparaît ici</div>
         <button onclick="checkProAudio()" style="background:#00C853">🔊 ÉCOUTER</button>
 
-        <!-- BOUTONS BUSINESS -->
         <button class="btn-pro" onclick="showPro()">⭐ ZAMA PRO - 500 FCFA/mois</button>
         <button class="btn-don" onclick="showDon()">❤️ Soutenir par MoMo</button>
     </div>
 
-    <!-- POPUP PRO -->
     <div id="proModal" class="modal">
         <div class="modal-content">
             <h2>ZAMA PRO 👑</h2>
             <p><b>500 FCFA/mois =</b></p>
             <p>✅ 3000 mots Fon/Yoruba</p>
             <p>✅ Photo + Audio illimités</p>
-            <p>✅ Zéro pub</p>
-            <br>
-            <p><b>Payer MTN MoMo :</b></p>
-            <p style="font-size:20px;color:#FF6B35"><b>97 XX XX XX</b></p>
+            <p>✅ Zéro pub</p><br>
+            <p><b>MTN MoMo :</b></p>
+            <p style="font-size:24px;color:#FF6B35"><b>42009112</b></p>
             <p>Motif: ZAMA</p>
             <button onclick="enterCode()">J'AI UN CODE PRO</button>
             <button onclick="closeModal()">Fermer</button>
         </div>
     </div>
 
-    <!-- POPUP DON -->
     <div id="donModal" class="modal">
         <div class="modal-content">
             <h2>Soutenir ZAMA ❤️</h2>
             <p><b>MTN MoMo :</b></p>
-            <p style="font-size:20px;color:#00C853"><b>97 XX XX XX</b></p>
+            <p style="font-size:24px;color:#00C853"><b>42009112</b></p>
             <p>Nom: ZAMA BÉNIN</p>
             <button onclick="closeModal()">Fermer</button>
         </div>
     </div>
 
 <script>
-// DICO OFFLINE
 const FON = {"bonjour":"miɖɔ","merci":"kúkú","oui":"ɛɛn","non":"ɛɛó","eau":"sin","manger":"ɖu","maison":"xwé","argent":"akwɛ","venir":"wá","aller":"yi","je t'aime":"un nyi wǎn na we","comment ça va":"a ɖo gbɛ a"};
 const YOR = {"bonjour":"eku aro","merci":"ese","oui":"bẹẹni","non":"rara","eau":"omi","manger":"jẹun","maison":"ile","argent":"owo","je t'aime":"mo nifẹ rẹ"};
 const FON_PRO = {"pardon":"kɛnklɛn","au revoir":"yiɖé","dieu":"mǎwǔ","travail":"azɔ̌","école":"wémáxɔmɛ","marché":"axi","père":"tɔ́","mère":"nɔ"};
@@ -115,10 +110,9 @@ let lastTranslation = '';
 let isPro = localStorage.getItem('zamaPro')==='true';
 let photoCount = parseInt(localStorage.getItem('photoCount')||'0');
 
-// INIT
 window.onload = function(){
     if(isPro) document.getElementById('proBadge').innerHTML='<span class="pro-badge">PRO</span>';
-    if(!isPro) (adsbygoogle = window.adsbygoogle || []).push({});
+    try{(adsbygoogle = window.adsbygoogle || []).push({});}catch(e){}
     if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 }
 
@@ -129,17 +123,16 @@ function swapLang(){
 }
 
 async function translate(){
-    const text = document.getElementById('inputText').value.trim().toLowerCase();
+    const input = document.getElementById('inputText');
+    const text = input.value.trim().toLowerCase();
     const from = document.getElementById('fromLang').value;
     const to = document.getElementById('toLang').value;
     const res = document.getElementById('result');
 
     if(!text){res.innerHTML='Écris quelque chose';return;}
-    if(from===to){res.innerHTML=document.getElementById('inputText').value;lastTranslation=text;return;}
-
+    if(from===to){res.innerHTML=input.value;lastTranslation=text;return;}
     res.innerHTML='Traduction...';
 
-    // DICO FON
     if(from==='fr'&&to==='fon'){
         if(FON[text]){res.innerHTML=FON[text]+' [Dico ZAMA]';lastTranslation=FON[text];return;}
         if(isPro&&FON_PRO[text]){res.innerHTML=FON_PRO[text]+' [Dico ZAMA PRO]';lastTranslation=FON_PRO[text];return;}
@@ -148,12 +141,9 @@ async function translate(){
         const allFon={...FON,...FON_PRO};
         for(let k in allFon){if(allFon[k]===text){res.innerHTML=k+' [Dico ZAMA]';lastTranslation=k;return;}}
     }
-
-    // DICO YORUBA
     if(from==='fr'&&to==='yor'&&YOR[text]){res.innerHTML=YOR[text]+' [Dico ZAMA]';lastTranslation=YOR[text];return;}
     if(from==='yor'&&to==='fr'){for(let k in YOR){if(YOR[k]===text){res.innerHTML=k+' [Dico ZAMA]';lastTranslation=k;return;}}}
 
-    // GOOGLE
     try{
         const url=`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${encodeURIComponent(text)}`;
         const response = await fetch(url);
@@ -161,22 +151,15 @@ async function translate(){
         lastTranslation = data[0][0][0];
         res.innerHTML=lastTranslation+' [Google]';
     }catch(e){
-        res.innerHTML='Erreur. Active internet ou passe Pro pour plus de mots offline.';
+        res.innerHTML='Erreur. Active internet.';
     }
 }
 
-function checkProPhoto(){
-    if(isPro || photoCount<3){document.getElementById('photoInput').click();}
-    else{showPro();}
-}
-
-function checkProAudio(){
-    if(isPro){speak();}
-    else{showPro();}
-}
+function checkProPhoto(){if(isPro||photoCount<3){document.getElementById('photoInput').click();}else{showPro();}}
+function checkProAudio(){if(isPro){speak();}else{showPro();}}
 
 function startVoice(){
-    if(!('webkitSpeechRecognition' in window)){alert('Utilise Chrome pour le vocal');return;}
+    if(!('webkitSpeechRecognition' in window)){alert('Utilise Chrome');return;}
     const r=new webkitSpeechRecognition();r.lang=document.getElementById('fromLang').value;r.start();
     micBtn.classList.add('listening');micBtn.innerHTML='🎤 ÉCOUTE...';
     r.onresult=e=>{document.getElementById('inputText').value=e.results[0][0].transcript;micBtn.classList.remove('listening');micBtn.innerHTML='🎤 Parler';translate();};
@@ -205,8 +188,8 @@ function closeModal(){document.getElementById('proModal').style.display='none';d
 function enterCode(){
     const code=prompt('Entre ton code ZAMA PRO:');
     if(code==='ZAMA2026'){localStorage.setItem('zamaPro','true');alert('ZAMA PRO activé!');location.reload();}
-    else if(code){alert('Code invalide. Paie 500 FCFA au 97 XX XX XX');}
+    else if(code){alert('Code invalide. Paie 500 FCFA au 42009112');}
 }
 </script>
 </body>
-    </html>
+                </html>
